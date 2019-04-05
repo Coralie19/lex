@@ -9,6 +9,7 @@ const { protectedRoutes, publicRoutes } = require('./routes');
 const db = require('./db/models');
 
 const app = express();
+app.use(express.static('build'));
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

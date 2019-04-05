@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server:/app
+      - /server/node_modules
+    container_name: ${SERVER_NAME}
+    depends_on:
+      - postgres
+    networks:
+      - lex-net
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      - ENV="prod"
+      - JWT_SECRET=${JWT_SECRET}
+      - DB_DEV=${DB_DEV}
+      - DB_PASS_DEV=${DB_PASS_DEV}
+      - DB_HOST=${DB_HOST}
+      - SERVER_PORT=${SERVER_PORT}
+      - CLOUDINARY_URL=${CLOUDINARY_URL}
+    restart: always
+    command: >
+      ./scripts/wait-for.sh ${POSTGRES_NAME}:${POSTGRES_PORT}
+      -- npm run prod
+  postgres:
+    image: postgres:10.6
+    container_name: ${POSTGRES_NAME}
+    environment:
+      - POSTGRES_DB=${DB_DEV}
+      - POSTGRES_USER=${DB_DEV}
+      - POSTGRES_PASSWORD=${DB_PASS_DEV}
+    networks:
+      - lex-net
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    restart: always
+
+networks:
+  lex-net:
+    driver: bridge

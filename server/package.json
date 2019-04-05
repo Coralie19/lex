@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prod": "node ./",
     "dev": "nodemon ./",
     "test": "./node_modules/.bin/mocha ./tests --exit",
     "lint": "./node_modules/.bin/eslint ./",
