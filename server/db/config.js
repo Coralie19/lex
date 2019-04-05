@@ -4,7 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 const logPath = path.join(__dirname, 'logfile.json');
-const logs = JSON.parse(fs.readFileSync(logPath) || '[]');
+const logfileExists = fs.existsSync(logPath);
+let logs;
+if (logfileExists) logs = JSON.parse(fs.readFileSync(logPath));
+else logs = [];
 
 function logger(log) {
   logs.push(log);
