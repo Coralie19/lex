@@ -1,3 +1,5 @@
 *node_modules
 .env
 *logfile.json
+server/uploads/*
+!server/uploads/.gitkeep
