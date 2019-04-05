@@ -3,9 +3,6 @@ version: '3'
 services:
   server:
     build: ./server
-    volumes:
-      - ./server:/app
-      - /server/node_modules
     container_name: ${SERVER_NAME}
     depends_on:
       - postgres
