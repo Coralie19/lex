@@ -1,7 +1,7 @@
 import React from 'react';
 import LanguageSelectedProficiency from './languageSelectedProficiency';
 import LanguageSelectedLearning from './languageSelectedLearning';
-import './languageSelected.css';
+import '../../../../styles/containers/languageSelected.css';
 
 const LanguageSelected = ({allProficiencies, selectedLanguages, setLanguageLearning, setLanguageProficiency, toggleLanguage}) => {
   return (

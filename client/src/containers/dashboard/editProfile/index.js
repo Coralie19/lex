@@ -6,7 +6,7 @@ import ImageUpload from './imageUpload';
 import TextInput from './textInput';
 import LanguageSearchResults from './languageSearchResults';
 import LanguageSelected from './languageSelected';
-import './editProfile.css';
+import '../../../styles/containers/editProfile.css';
 
 class EditProfile extends Component {
   state = {
@@ -134,8 +134,10 @@ class EditProfile extends Component {
             </div>
           </div>
         </div>
-        <input className='edit-profile__submit' type='submit' value={`${this.state.saveState}`}></input>
-        <input onClick={this.props.close} className='edit-profile__submit' type='submit' value='Close'></input>
+        <div className='edit-profile__buttons'>
+          <input className='edit-profile__submit' type='submit' value={`${this.state.saveState}`}></input>
+          <input onClick={this.props.close} className='edit-profile__submit' type='submit' value='Close'></input>
+        </div>
       </form>
     )
   }

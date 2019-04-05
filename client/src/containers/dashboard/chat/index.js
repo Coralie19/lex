@@ -10,6 +10,10 @@ import IconButton from '../../../ui/iconButton';
 import Text from './text';
 import Video from './video';
 
+import videoCall from '../../../assets/video-call.png';
+import text from '../../../assets/text.png';
+import close from '../../../assets/close.png';
+
 import '../../../styles/containers/chat/chat.css';
 
 class Chat extends Component {
@@ -39,10 +43,10 @@ class Chat extends Component {
             <div className='chat__navigation'>
               {
                 currentLocation === 'text'
-                ? <IconButton iconUrl='/video-call.png' style={{height:'3rem', width:'3rem'}} onClick={() => this.props.history.push(`${this.pathname}/video`)} />
-                : <IconButton iconUrl='/text.png' style={{height:'3rem', width:'3rem'}} onClick={() => this.props.history.push(`${this.pathname}/text`)} />
+                ? <IconButton iconUrl={videoCall} style={{height:'3rem', width:'3rem'}} onClick={() => this.props.history.push(`${this.pathname}/video`)} />
+                : <IconButton iconUrl={text} style={{height:'3rem', width:'3rem'}} onClick={() => this.props.history.push(`${this.pathname}/text`)} />
               }
-              <IconButton iconUrl='/close.png' style={{height:'1rem', width:'1rem'}} onClick={() => this.props.history.push('/dashboard')} />
+              <IconButton iconUrl={close} style={{height:'1rem', width:'1rem'}} onClick={() => this.props.history.push('/dashboard')} />
             </div>
           </div>
           <Switch>

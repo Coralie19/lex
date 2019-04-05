@@ -8,6 +8,8 @@ import MessageLoader from '../../../ui/messageLoader';
 
 import models from '../../../store/actions/models';
 
+import send from '../../../assets/send.png';
+
 import '../../../styles/containers/chat/text.css';
 
 class Text extends Component {
@@ -75,7 +77,7 @@ class Text extends Component {
         </div>
         <form className='text__input' onSubmit={this.onMessageSubmit}>
           <TextInput value={this.state.textInput} onChange={this.onTextChange} style={{width: '100%'}} />
-          <IconButton iconUrl='/send.png' style={{height: '3rem', width: '3rem'}} />
+          <IconButton iconUrl={send} style={{height: '3rem', width: '3rem'}} />
         </form>
       </div>
     )
