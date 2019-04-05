@@ -2,5 +2,4 @@
 .env
 *logfile.json
 server/uploads/*
-server/build
 !server/uploads/.gitkeep
