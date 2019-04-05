@@ -1,0 +1,10 @@
+.icon-button {
+  outline: none;
+  border: none;
+  background-color: inherit;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  margin: 0.25rem 0.5rem;
+}

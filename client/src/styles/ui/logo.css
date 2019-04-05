@@ -1,0 +1,30 @@
+.logo {
+  font-weight: 700;
+  font-size: 4rem;
+  position: relative;
+}
+
+.logo__link {
+  text-decoration: none;
+  color: black;
+}
+
+.logo::after {
+  content: "";
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+
+  background-image: url('/logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: -1rem -0.5rem;
+  padding: 1rem 0.5rem;
+}

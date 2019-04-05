@@ -1,0 +1,18 @@
+.bullet-block {
+  margin: 0.25rem 0;
+}
+
+.bullet-block__title {
+  font-family: var(--serif), serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.bullet-block__list {
+  margin: 0;
+}
+
+.bullet-block__list-item {
+  font-family: var(--serif), serif;
+  font-size: 1.25rem;
+}

@@ -1,0 +1,6 @@
+.text-link {
+  font-family: var(--sans-serif), sans-serif;
+  font-style: italic;
+  font-size: 1rem;
+  margin: 0.25rem 0;
+}

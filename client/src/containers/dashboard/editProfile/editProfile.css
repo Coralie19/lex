@@ -1,0 +1,125 @@
+.edit-profile {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: 2rem;
+}
+
+.edit-profile__title {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.edit-profile__main {
+  flex: 1 1 50%;
+  display: flex;
+  overflow-y: scroll;
+  margin-bottom: 1rem;
+}
+
+.edit-profile__left, .edit-profile__right {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+input[type='file'] {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}
+
+[class^='edit-profile__container'] {
+  margin: 0.5rem 0;
+}
+
+[class^='edit-profile__prompt'] {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--serif), serif;
+  margin-bottom: 0.5rem;
+}
+
+[class^='edit-profile__input'] {
+  font-size: 1rem;
+  font-family: var(--sans-serif), sans-serif;
+  padding: 0.5rem;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1) inset;
+}
+
+.edit-profile__input--photo {
+  position: relative;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
+}
+
+.edit-profile__input--photo:focus-within {
+  outline: 1px solid;
+}
+
+.edit-profile__input--about-me {
+  width: 80%;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.edit-profile__submit {
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
+  font-family: var(--sans-serif), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 50%;
+  padding: 1rem;
+  align-self: center;
+  cursor: pointer;
+}
+
+.edit-profile__language-search-results {
+  position: absolute;
+  top: 6rem;
+  left: 0;
+  background: white;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
+  font-size: 1rem;
+}
+
+.edit-profile__language-search-results-item {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.edit-profile__language-search-results-item:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile__main::-webkit-scrollbar-button { 
+  display: none;
+  height: 13px;
+  border-radius: 0px;
+  background-color: #AAA;
+} 
+.edit-profile__main::-webkit-scrollbar-button:hover { 
+  background-color: #AAA;
+} 
+.edit-profile__main::-webkit-scrollbar-thumb { 
+  background-color: #CCC;
+  border-radius: 20%;
+} 
+.edit-profile__main::-webkit-scrollbar-thumb:hover { 
+  background-color: #CCC;
+} 
+.edit-profile__main::-webkit-scrollbar-track { 
+  background-color: #efefef;
+}
+.edit-profile__main::-webkit-scrollbar-track:hover { 
+  background-color: #CCC; 
+} 
+.edit-profile__main::-webkit-scrollbar{ 
+  width: 3px; 
+}

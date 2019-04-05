@@ -1,0 +1,24 @@
+[class^='text-button'] {
+  font-family: var(--sans-serif), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  box-shadow: var(--slight-shadow), var(--side-shadow);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0.5rem;
+  color: var(--neutral-color);
+  background: var(--neutral-bg-color);
+}
+
+.text-button--danger {
+  color: var(--danger-color);
+  background: var(--danger-bg-color);
+}
+
+.text-button--warning {
+  color: var(--warning-color);
+  background: var(--warning-bg-color);
+}

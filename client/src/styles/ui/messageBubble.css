@@ -1,0 +1,26 @@
+[class^='message-bubble--'] {
+  display: inline-block;
+  box-shadow: var(--slight-shadow);
+  border-radius: 0.5rem;
+
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0.5rem;
+  align-self: flex-start;
+}
+
+.message-bubble--self {
+  align-self: flex-end;
+}
+
+.message-bubble__content {
+  font-size: 1rem;
+}
+
+.message-bubble__author {
+  font-weight: 700;
+}
+
+.message-bubble__time {
+  font-style: italic;
+  font-size: 0.5rem;
+}

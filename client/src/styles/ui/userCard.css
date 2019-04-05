@@ -1,0 +1,22 @@
+.user-card {
+  min-width: 15rem;
+  max-width: 20rem;
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  box-shadow: var(--main-shadow), var(--side-shadow);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.user-card__title {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.user-card__profile {
+  display: inline-block;
+  margin: 0 auto;
+}

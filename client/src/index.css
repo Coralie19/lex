@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,400i|Raleway:400,700');
+
+:root, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  --sans-serif: 'Raleway';
+  --serif: 'Crimson Text';
+  --main-shadow: 0px 16px 23px -14px rgba(0,0,0,0.75);
+  --side-shadow: 0px 16px 30px -18px rgba(0,0,0,0.75);
+  --slight-shadow: 0px 3px 12px -3px rgba(94,94,94,1);
+  --slight-shadow-inset: 0px 0px 12px -3px rgba(94,94,94,1) inset;
+
+  --neutral-color: black;
+  --neutral-bg-color: white;
+
+  --success-color: #155724;
+  --sucecess-bg-color: #d4edda;
+
+  --danger-color: #721c24;
+  --danger-bg-color: #f8d7da;
+
+  --warning-color: #856404;
+  --warning-bg-color: #fff3cd;
+
+
+  font-size: 16px;
+  font-family: var(--sans-serif), sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

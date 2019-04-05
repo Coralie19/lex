@@ -1,0 +1,7 @@
+.edit {
+  flex: 1;
+}
+
+.edit__form {
+  display: flex;
+}

@@ -1,0 +1,5 @@
+.heading {
+  font-family: var(--sans-serif), sans-serif;
+  font-size: 2rem;
+  margin: 0.25rem 0;
+}

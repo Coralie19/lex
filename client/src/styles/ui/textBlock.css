@@ -1,0 +1,18 @@
+.text-block {
+  margin: 0.25rem 0;
+  width: 100%;
+}
+
+.text-block__title {
+  font-family: var(--serif), serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
+
+.text-block__text {
+  font-family: var(--serif), serif;
+  overflow-wrap: break-word;
+  font-size: 1.25rem;
+}
