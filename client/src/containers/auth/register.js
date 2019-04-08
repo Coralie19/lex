@@ -25,7 +25,7 @@ class Register extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.post('/register', {
+    this.props.post('/auth', {
       username: this.state.username,
       password: this.state.password,
     })

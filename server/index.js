@@ -4,8 +4,7 @@ const express = require('express');
 const helmet = require('helmet');
 const socket = require('./socket');
 const logger = require('./middleware/logger');
-const authentication = require('./middleware/authentication');
-const { protectedRoutes, publicRoutes } = require('./routes');
+const routes = require('./routes');
 const db = require('./db/models');
 
 const app = express();
@@ -14,9 +13,7 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
-app.use(publicRoutes);
-app.use(authentication);
-app.use(protectedRoutes);
+app.use(routes);
 app.use((err, req, res) => {
   res.status(404).send('Not found');
 });

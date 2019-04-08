@@ -43,7 +43,7 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const encoded = btoa(Object.values(this.state).join(':'))
-    this.props.get('/login', {
+    this.props.get('/auth', {
       headers: {
         Authorization: `Basic ${encoded}`
       }
