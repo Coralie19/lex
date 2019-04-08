@@ -65,9 +65,13 @@ class Text extends Component {
       <div className='chat__text'>
         <div className='text__history'>
           {
-            this.props.messages.map(message => {
-              return <MessageBubble key={message.id} author={this.props.buddy.username} timestamp={message.timestamp} content={message.content} isSelf={message.authorId === this.props.user.id} />
-            })
+            this.props.messages.map(message => <MessageBubble
+              key={message.id}
+              author={message.authorId === this.props.user.id ? this.props.user.username : this.props.buddy.username}
+              timestamp={message.timestamp}
+              content={message.content}
+              isSelf={message.authorId === this.props.user.id}
+            />)
           }
           {
             this.state.loadingMsg &&
