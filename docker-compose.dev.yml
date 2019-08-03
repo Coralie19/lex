@@ -4,8 +4,8 @@ services:
   server:
     build: ./server
     volumes:
-      - ./server:/app
-      - /server/node_modules
+      - ./server:/app/
+      - /app/node_modules
       - ./logs:/root/.npm/_logs
     container_name: ${SERVER_NAME}
     depends_on:
@@ -41,8 +41,8 @@ services:
   client:
     build: ./client
     volumes:
-      - ./client:/app
-      - /client/node_modules
+      - ./client:/app/
+      - /app/node_modules
     container_name: ${CLIENT_NAME}
     depends_on:
       - server

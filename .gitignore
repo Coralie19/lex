@@ -3,3 +3,4 @@
 *logfile.json
 server/uploads/*
 !server/uploads/.gitkeep
+start.sh
