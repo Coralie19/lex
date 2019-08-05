@@ -13,11 +13,19 @@ import TextLink from '../../ui/textLink';
 import '../../styles/containers/auth/login.css';
 import withApi from '../../hocs/withApi';
 
+
 class Login extends Component {
   state = {
     username: '',
     password: ''
   }
+
+  // storedToken = () => {
+  //   const storedToken = window.localStorage.getItem('token');
+  //   if (storedToken) this.props.setToken(storedToken);
+  //   return storedToken
+  // }
+
 
   componentDidMount() {
     const storedToken = window.localStorage.getItem('token');
