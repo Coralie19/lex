@@ -20,8 +20,12 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const storedToken = window.localStorage.getItem('token');
-    if (storedToken) this.props.setToken(storedToken);
+    this.storedToken();
+  }
+
+  storedToken = () => {
+  const storedToken = window.localStorage.getItem('token');
+  if (storedToken) this.props.setToken(storedToken);
   }
 
   componentDidUpdate() {
