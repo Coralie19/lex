@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {useState}  from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Logo from '../../ui/logo';
@@ -10,47 +10,42 @@ import TextLink from '../../ui/textLink';
 import '../../styles/containers/auth/register.css';
 import withApi from '../../hocs/withApi';
 
-class Register extends Component {
-  state = {
-    username: '',
-    password: '',
-    passwordRepeat: '',
+
+const Register = (props) => {
+
+  const [inputs, setInputs] = useState({username: '', password: '', passwordRepeat: ''});
+
+  const handleInputChange = (event) => {
+    event.persist();
+    setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
   }
 
-  onTextChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.props.post('/auth', {
-      username: this.state.username,
-      password: this.state.password,
+    props.post('/auth', {
+      username: inputs.username,
+      password: inputs.password,
     })
     .then((res) => {
       const { token } = res.data;
       window.localStorage.setItem('token', token);
-      this.props.history.push('/login');
+      props.history.push('/login');
     });
   }
 
-  render() {
     return (
       <div className='register-container'>
         <Logo />
-        <form onSubmit={this.onSubmit} className='register'>
+        <form onSubmit={handleSubmit} className='register'>
           <Heading title='Register' />
-          <TextInput value={this.state.username} onChange={this.onTextChange} name='username' placeholder='Username' />
-          <TextInput type="password" value={this.state.password} onChange={this.onTextChange} name='password' placeholder='Password' />
-          <TextInput type="password" value={this.state.passwordRepeat} onChange={this.onTextChange} name='passwordRepeat' placeholder='Repeat Password' />
+          <TextInput value={inputs.username} onChange={handleInputChange} name='username' placeholder='Username' />
+          <TextInput type="password" value={inputs.password} onChange={handleInputChange} name='password' placeholder='Password' />
+          <TextInput type="password" value={inputs.passwordRepeat} onChange={handleInputChange} name='passwordRepeat' placeholder='Repeat Password' />
           <TextButton />
           <TextLink title='Login' to='/login' />
         </form>
       </div>
     )
   }
-}
 
 export default withApi(withRouter(Register));
