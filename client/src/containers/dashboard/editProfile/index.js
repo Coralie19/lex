@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState}  from 'react';
 import axios from 'axios';
 import { pick } from 'lodash';
 
@@ -8,116 +8,113 @@ import LanguageSearchResults from './languageSearchResults';
 import LanguageSelected from './languageSelected';
 import '../../../styles/containers/editProfile.css';
 
-class EditProfile extends Component {
-  state = {
-    ...this.props.user,
-    languageSearchText: '',
-    profilePhoto: null,
-    saveState: 'Save',
-  };
 
-  onSubmit = (e) => {
+const EditProfile = (props) => {
+
+  const [inputs, setInputs] = useState({username: props.username, aboutMe: '', languages:[], languageSearchText: ''});
+  const [profilePhoto, setPhoto] = useState(null);
+  const [saveState, setSaveState ]= useState('Save');
+
+  const handleSubmit = (e) => {
     e.preventDefault()
-    const promises = []
-    this.setState({ saveState: 'Saving...' });
+    const promises = [];
+    setSaveState('Saving...'); //not working
     promises.push(axios({
       method: 'put',
       url: '/user',
       headers: { authorization: `Bearer ${window.localStorage.getItem('token')}` },
-      data: pick(this.state, 'aboutMe', 'languages', 'username')
+      data: pick(inputs, 'aboutMe', 'languages', 'username') //to check
     })
     .then(res => {
       console.log(res.data);
-      this.props.replaceUser(res.data)
+      props.replaceUser(res.data)
     }));
 
-    if (this.state.profilePhoto) {
+    if (profilePhoto) {
       const image = new FormData();
-      image.append('profilePhoto', this.state.profilePhoto);
+      image.append('profilePhoto', profilePhoto);
       promises.push(axios.post('/user/photo', image, {
         headers: {
           authorization: `Bearer ${window.localStorage.getItem('token')}`,
           'Content-Type': "multipart/form-data",
         }
       })
-      .then(res => this.props.setUser({ photoUrl: res.data.photoUrl })));
+      .then(res => props.setUser({ photoUrl: res.data.photoUrl })));
     }
     Promise.all(promises)
-    .then(() => {
-      this.setState({ saveState: 'Saved' });
+    .then(() => { //not working
+      setSaveState('Saved');
     })
   }
 
-  onTextChange = (e) => {
-    const newState = {};
-    newState[e.target.name] = e.target.value;
-    this.setState(newState);
+  const onTextChange = (e) => {
+    e.persist();
+    setInputs(inputs => ({...inputs, [e.target.name]: e.target.value}));
   }
 
-  onImageChange = (e) => {
-    this.setState({
+  const onImageChange = (e) => {
+    setPhoto({
       profilePhoto: e.target.files[0]
     })
   }
 
-  toggleLanguage = (e) => {
+  const toggleLanguage = (e) => {
     const languageId = e.target.getAttribute('data-id');
-    const index = this.state.languages.findIndex(language => language.id === Number(languageId));
+    const index = inputs.languages.findIndex(language => language.id === Number(languageId));
     if (index === -1) {
-      const language = this.props.allLanguages[languageId];
+      const language = props.allLanguages[languageId];
       language.learning = false;
-      language.proficiency = this.props.allProficiencies[1];
-      this.setState(state => ({ 
-        languages: state.languages.concat(language),
+      language.proficiency = props.allProficiencies[1];
+      setInputs(inputs => ({ 
+        languages: inputs.languages.concat(language),
         languageSearchText: '' 
       }));
     } else {
-      const newLanguages = this.state.languages.slice();
+      const newLanguages = inputs.languages.slice();
       newLanguages.splice(index, 1);
-      this.setState({  
+      setInputs({  
         languages: newLanguages, 
         languageSearchText: '' 
       });
     }
   }
 
-  setLanguageProficiency = (e) => {
+  const setLanguageProficiency = (e) => {
     const languageId = e.target.name
     const index = e.target.selectedIndex;
     const option = e.target.childNodes[index].value;
-    this.setState(state => {
-      const languageIndex = state.languages.findIndex(language => language.id === Number(languageId));
-      const newLanguages = state.languages.slice();
-      const newProficiency = this.props.allProficiencies[option];
-      newLanguages[languageIndex] = Object.assign({}, state.languages[languageIndex], { proficiency: newProficiency });
+    setInputs(inputs => {
+      const languageIndex = inputs.languages.findIndex(language => language.id === Number(languageId));
+      const newLanguages = inputs.languages.slice();
+      const newProficiency = props.allProficiencies[option];
+      newLanguages[languageIndex] = Object.assign({}, inputs.languages[languageIndex], { proficiency: newProficiency });
       return { languages: newLanguages }
     })
   }
 
-  setLanguageLearning = (e) => {
+  const setLanguageLearning = (e) => {
     const target = e.target;
-    this.setState(state => {
-      const languageIndex = state.languages.findIndex(language => language.id === Number(target.id));
-      const newLanguages = state.languages.slice();
-      newLanguages[languageIndex] = Object.assign({}, state.languages[languageIndex], { learning: !state.languages[languageIndex].learning });
+    setInputs(inputs => {
+      const languageIndex = inputs.languages.findIndex(language => language.id === Number(target.id));
+      const newLanguages = inputs.languages.slice();
+      newLanguages[languageIndex] = Object.assign({}, inputs.languages[languageIndex], { learning: !inputs.languages[languageIndex].learning });
       return { languages: newLanguages }
     })
   }
 
-  render () {
     return (
-      <form onSubmit={this.onSubmit} className='edit-profile'>
+      <form onSubmit={handleSubmit} className='edit-profile'>
         <div className='edit-profile__title'>Edit Profile</div>
         <div className='edit-profile__main'>
           <div className='edit-profile__left'>
-            <ImageUpload title='Upload a photo' cssName='photo' onChange={this.onImageChange} value={this.state.profilePhoto} />
-            <TextInput title='Username' onChange={this.onTextChange} value={this.state.username} cssName='username' name='username' />
+            <ImageUpload title='Upload a photo' cssName='photo' onChange={onImageChange} value={inputs.profilePhoto} />
+            <TextInput title='Username' onChange={onTextChange} value={inputs.username} cssName='username' name='username' />
             <div className='edit-profile__container--about-me'>
               <div className={`edit-profile__prompt--about-me`}>About Me</div>
               <textarea
                 className={`edit-profile__input--about-me`}
-                onChange={this.onTextChange}
-                value={this.state.aboutMe || ''}
+                onChange={onTextChange}
+                value={inputs.aboutMe || ''}
                 name='aboutMe'
                 type='text'>
               </textarea>
@@ -125,22 +122,21 @@ class EditProfile extends Component {
           </div>
           <div className='edit-profile__right'>
             <div className='edit-profile__language-autocomplete'>
-              <TextInput title='Add a language' onChange={this.onTextChange} value={this.state.languageSearchText} cssName='language-search' name='languageSearchText' />
-              <LanguageSearchResults languageSearchText={this.state.languageSearchText} allLanguages={this.props.allLanguages} toggleLanguage={this.toggleLanguage} />
+              <TextInput title='Add a language' onChange={onTextChange} value={inputs.languageSearchText} cssName='language-search' name='languageSearchText' />
+              <LanguageSearchResults languageSearchText={inputs.languageSearchText} allLanguages={props.allLanguages} toggleLanguage={toggleLanguage} />
             </div>
             <div className='edit-profile__container--language-selected'>
               <div className='edit-profile__prompt'>Current languages</div>
-              <LanguageSelected toggleLanguage={this.toggleLanguage} selectedLanguages={this.state.languages} setLanguageProficiency={this.setLanguageProficiency} setLanguageLearning={this.setLanguageLearning} allProficiencies={this.props.allProficiencies} />
+              <LanguageSelected toggleLanguage={toggleLanguage} selectedLanguages={inputs.languages} setLanguageProficiency={setLanguageProficiency} setLanguageLearning={setLanguageLearning} allProficiencies={props.allProficiencies} />
             </div>
           </div>
         </div>
         <div className='edit-profile__buttons'>
-          <input className='edit-profile__submit' type='submit' value={`${this.state.saveState}`}></input>
-          <input onClick={this.props.close} className='edit-profile__submit' type='submit' value='Close'></input>
+          <input className='edit-profile__submit' type='submit' value={`${saveState}`}></input>
+          <input onClick={props.close} className='edit-profile__submit' type='submit' value='Close'></input>
         </div>
       </form>
     )
   }
-}
 
 export default EditProfile;

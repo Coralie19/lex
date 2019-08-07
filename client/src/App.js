@@ -3,7 +3,8 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import PrivateRoute from './hocs/privateRoute';
 import { connect } from 'react-redux';
 
-import Login from './containers/auth/login';
+import Signup from './containers/auth/signup'
+// import Login from './containers/auth/login';
 import Register from './containers/auth/register';
 import Dashboard from './containers/dashboard';
 
@@ -14,7 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route path='/login' component={Login} />
+          <Route path='/login' component={Signup} />
           <Route path='/register' component={Register} />
           <PrivateRoute path='/dashboard' user={this.props.user} component={Dashboard} />
           <Route path='/' exact render={() => (
