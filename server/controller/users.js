@@ -52,12 +52,20 @@ async function createFilteredUser(user) {
 
 exports.getAll = async (req, res) => {
   res.set('Content-Type', 'application/json');
+  console.log(req.user)
   await User.findOne({
     where: {
       id: req.user.id,
     },
     include: [{ model: Language }],
   });
+  // const test = await User.findOne({
+  //   where: {
+  //     username: "igorn"
+  //   }
+  // })
+
+  // console.log(test);
 
   const users = await User.findAll();
   res.send(users);
@@ -258,15 +266,16 @@ exports.create = async (req, res) => {
 
     res
       .set('Content-Type', 'application/json')
-      .status(200)
+      .status(201)
       .send({ token, user: filteredUser });
   } catch (err) {
     if (err.original) {
       res
-        .status(400)
+        .status(409)
         .set('Content-Type', 'application/json')
         .send(JSON.stringify(err.errors[0].message));
     } else {
+      console.log('err', err)
       res
         .status(500)
         .set('Content-Type', 'application/json')
